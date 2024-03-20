@@ -41,18 +41,18 @@ for i in range(len(acid)):
             acid_val = target - measure
             alkali_val = alkali[center] - measure
 
-for i in range(len(acid)-1):
-    num = (acid[i] + acid[i+1]) - 2*measure 
+if len(acid) >= 2:
+    num = (acid[0] + acid[1]) - 2*measure 
     if abs(result) > abs(num):
-        alkali_val = acid[i] - measure
-        acid_val = acid[i+1] - measure
+        alkali_val = acid[0] - measure
+        acid_val = acid[1] - measure
         result = num
 
-for i in range(len(alkali)-1):
-    num = (alkali[i] + alkali[i+1]) - 2*measure
+if len(alkali) >= 2:
+    num = (alkali[-1] + alkali[-2]) - 2*measure
     if abs(result) > abs(num):
-        alkali_val = alkali[i] - measure
-        acid_val = alkali[i+1] - measure
+        alkali_val = alkali[-2] - measure
+        acid_val = alkali[-1] - measure
         result = num
 
 print(alkali_val, acid_val)
