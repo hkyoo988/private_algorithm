@@ -11,13 +11,13 @@ alkali = []
 
 for i in range(n):
     if liquid[i] > 0:
-        acid.append(liquid[i]+1000000000) 
+        acid.append(liquid[i]) 
     else:
-        alkali.append(liquid[i]+1000000000)
+        alkali.append(liquid[i])
 
 start, end = 0, len(alkali)-1
 
-measure = 1000000000
+measure = 0
 result = sys.maxsize
 for i in range(len(acid)):
     target = acid[i]
