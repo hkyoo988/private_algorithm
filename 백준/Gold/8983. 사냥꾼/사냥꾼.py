@@ -1,7 +1,7 @@
 n, m, l = tuple(map(int, input().split()))
 
 shooter = list(map(int, input().split()))
-
+shooter.sort()
 animals = [
     tuple(map(int, input().split()))
     for _ in range(m)
@@ -17,7 +17,7 @@ for x, y in animals:
         
         mid = (start+end) // 2
 
-        if target - distance <= shooter[mid] <= target + distance:
+        if shooter[mid] - distance <= target <= shooter[mid] + distance:
             cnt += 1
             break
         
@@ -27,3 +27,5 @@ for x, y in animals:
             end = mid - 1
 
 print(cnt)        
+
+        
