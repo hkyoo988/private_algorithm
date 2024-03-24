@@ -24,12 +24,11 @@ cost[s] = 0
 while pq:
     c, s = heapq.heappop(pq)
 
-    if c > cost[s]:
-        continue
-    for ns, nc in arr[s]:
-        c1 = c + nc
-        if c1 < cost[ns]:
-            cost[ns] = c1
-            heapq.heappush(pq, (c1, ns))
+    if c == cost[s]:
+        for ns, nc in arr[s]:
+            c1 = c + nc
+            if c1 < cost[ns]:
+                cost[ns] = c1
+                heapq.heappush(pq, (c1, ns))
 
 print(cost[e])
