@@ -44,4 +44,4 @@ while q:
         cnt = len(q)
         changed = False
 
-print(day if tomato == 0 else -1)
+print(day if tomato <= 0 else -1)
