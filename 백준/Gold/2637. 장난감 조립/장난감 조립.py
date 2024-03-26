@@ -33,5 +33,5 @@ while q:
             q.append(x)
 
 for idx, c in enumerate(cost[n][1:]):
-    if idx in basic:
+    if cost[n][idx] > 0:
         print(idx, cost[n][idx])
