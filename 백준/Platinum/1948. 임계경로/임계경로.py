@@ -1,5 +1,6 @@
 import sys
 from collections import deque
+sys.setrecursionlimit(10**6)
 
 n = int(sys.stdin.readline().rstrip())
 
@@ -33,15 +34,24 @@ while q:
         if e[end] == 0:
             q.append((end))
 
-q = deque([END])
+# q = deque([END])
 route = set()
-while q:
-    x = q.popleft()
 
-    for i in street[x]:
-        if (x, i) not in route:
-            route.add((x, i))
-            q.append(i)
+def find_max_route(end):
+
+    for i in street[end]:
+        if (end, i) not in route:
+            route.add((end, i))
+            find_max_route(i)
+
+find_max_route(END)
+# while q:
+#     x = q.popleft()
+
+#     for i in street[x]:
+#         if (x, i) not in route:
+#             route.add((x, i))
+#             q.append(i)
 
 print(time[end])
 print(len(route))
