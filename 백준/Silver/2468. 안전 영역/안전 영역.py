@@ -13,7 +13,7 @@ for i in range(n):
     max_height = max(max_height, max(arr[i]))
 
 def in_range(x, y):
-    return 0 <= x and x < n and 0 <= y and y < n
+    return 0 <= x < n and 0 <= y < n
 
 def dfs(x, y, h, visited):
     dxs, dys = [1, 0, -1, 0], [0, 1, 0, -1]
