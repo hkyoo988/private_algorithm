@@ -1,29 +1,34 @@
-s = list(input())
+import sys
 
+arr = list(sys.stdin.readline().rstrip())
 stack = []
-ans = 0
-tmp = 1
-for i in range(len(s)):
-    if s[i] == "(":
-        stack.append(s[i])
+tmp, ans = 1, 0
+for i in range(len(arr)):
+    if arr[i] == "(":
         tmp *= 2
-    elif s[i] == "[":
-        stack.append(s[i])
+        stack.append("(")
+    elif arr[i] == "[":
         tmp *= 3
-    elif s[i] == ")":
-        if not stack or stack.pop() != "(":
-            ans = 0
-            break
-        if s[i-1] == "(":
-            ans += tmp
-        tmp //= 2
+        stack.append("[")
     else:
-        if not stack or stack.pop() != "[":
-            ans = 0
-            break
-        if s[i-1] == "[":
+        if arr[i] == ")":
+            if not stack or stack.pop() != "(":
+                ans = 0
+                break
+            if arr[i-1] in [")", "]"]:
+                tmp //= 2
+                continue
             ans += tmp
-        tmp //= 3
+            tmp //= 2
+        else:
+            if not stack or stack.pop() != "[":
+                ans = 0
+                break
+            if arr[i-1] in [")", "]"]:
+                tmp //= 3
+                continue
+            ans += tmp
+            tmp //= 3
 
 if stack:
     print(0)
