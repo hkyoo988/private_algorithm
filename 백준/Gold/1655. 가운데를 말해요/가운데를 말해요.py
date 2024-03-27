@@ -1,23 +1,22 @@
-import heapq
 import sys
+import heapq
 
-max_heap = []
-min_heap = []
-l = int(sys.stdin.readline())
+n = int(sys.stdin.readline().rstrip())
 
-for _ in range(l):
-    n = int(sys.stdin.readline())
-    if len(max_heap) == len(min_heap):
-        heapq.heappush(max_heap, -n)
+max_h = []
+min_h = []
+for i in range(n):
+    num = int(sys.stdin.readline().rstrip())
+    if i%2 == 0:
+        heapq.heappush(max_h, -num)
     else:
-        heapq.heappush(min_heap, n)
+        heapq.heappush(min_h, num)
 
-    if len(max_heap) >= 1 and len(min_heap) >= 1 and max_heap[0]*(-1) > min_heap[0]:
-        max_val = heapq.heappop(max_heap)*(-1)
-        min_val = heapq.heappop(min_heap)
+    if i>0 and min_h[0] < -max_h[0]:
+        min_val = heapq.heappop(min_h)
+        max_val = -heapq.heappop(max_h)
 
-        heapq.heappush(max_heap, -min_val)
-        heapq.heappush(min_heap, max_val)
-
-
-    print(max_heap[0]*(-1))
+        heapq.heappush(min_h, max_val)
+        heapq.heappush(max_h, -min_val)
+    
+    print(-max_h[0])
