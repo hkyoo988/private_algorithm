@@ -1,36 +1,35 @@
 import sys
 import heapq
 
-def find_parent(x):
-    if parent[x] != x:
-        x = find_parent(parent[x])
-    
-    return parent[x]
-
-def union_parent(x, y):
-    x = find_parent(x)
-    y = find_parent(y)
-
-    if x < y:
-        parent[y] = x
-    else:
-        parent[x] = y
-
 n, m = tuple(map(int, sys.stdin.readline().split()))
 
-hq = []
-
+arr = [[] for _ in range(n+1)]
 for _ in range(m):
     a, b, c = tuple(map(int, sys.stdin.readline().split()))
-    heapq.heappush(hq, (c, a, b))
 
-parent = [i for i in range(n+1)]
-ways = []
-while hq:
-    c, a, b = heapq.heappop(hq)
+    arr[a].append((c, b))
+    arr[b].append((c, a))
 
-    if find_parent(a) != find_parent(b):
-        union_parent(a, b)
-        ways.append(c)
+visited = [0]*(n+1)
+def prim():
+    hq = []
+    heapq.heappush(hq, (0, 1))
+    total = []
+    while hq:
+        c, s = heapq.heappop(hq)
 
-print(sum(ways)-max(ways))
+        if not visited[s]:
+            visited[s] = True
+            total.append(c)
+
+        if len(total) == n:
+            break
+
+        for c, v in arr[s]:
+            if not visited[v]:
+                heapq.heappush(hq, (c, v))
+
+
+    return sum(total) - max(total)
+
+print(prim())
